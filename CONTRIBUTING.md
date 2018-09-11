@@ -50,6 +50,10 @@ Please ensure your code is formatted correctly before making a PR. We use a modi
 
 1. Make sure you have a [GitHub account](https://github.com/join).
 2. [Fork the repository](https://help.github.com/articles/fork-a-repo/) and create your branch from `master`.
-3. Install the project dependencies (running `gradle`, `yarn`, etc.)
-4. Make your changes
-4. [PR the changes back into this repository](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
+3. Install the project dependencies.
+4. Make your changes.
+5. If you've added code that should be tested, add tests.
+6. If you've added code that updates APIs, add/update documentation.
+7. Ensure the tests pass.
+8. Ensure your code meets the [code style](#code-style-and-conventions).
+9. [PR the changes back into this repository](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
