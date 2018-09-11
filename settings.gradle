@@ -1,0 +1,5 @@
+rootProject.name = 'skeleton'
+
+gradle.ext {
+    formattedName = 'Skeleton'
+}

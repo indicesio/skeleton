@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'com.github.hierynomus.license' version '0.14.0'
+    id 'org.ajoberstar.grgit' version '2.3.0'
+}
+
+group 'io.indices'
+version '1.0-SNAPSHOT'
+
+defaultTasks 'licenseFormat', 'build'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+// License settings
+license {
+    header = file('HEADER')
+
+    include '**/*.java'
+    mapping('java', 'SLASHSTAR_STYLE')
+    strictCheck true
+
+    ext.name = gradle.ext.formattedName
+}
+
+processResources {
+    from 'LICENSE'
+}
+
+task javadocJar(type: Jar) {
+    classifier 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
