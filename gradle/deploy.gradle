@@ -1,0 +1,46 @@
+apply plugin: 'maven'
+
+// set by build server:
+if (project.hasProperty('deployRepo') && project.hasProperty('deployArtifactName') && project.hasProperty('deployUsername') && project.hasProperty('deployPassword')) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                repository(url: project.deployRepo) {
+                    authentication(userName: project.deployUsername, password: project.deployPassword)
+                }
+
+                pom {
+                    artifactId = gradle.ext.artifactName
+
+                    project {
+                        name = project.deployArtifactName
+                        description = project.description
+                        packaging = 'jar'
+                        url = project.url
+
+                        scm {
+                            url "https://github.com/ ${project.organization}/${project.name}/"
+                            connection "scm:git:git@github.com:${project.organization}/${project.name}.git"
+                            developerConnection "scm:git:git@github.com:${project.organization}/${project.name}.git"
+                        }
+
+                        issueManagement {
+                            system 'GitHub Issues'
+                            url "https://github.com/${project.organization}/${project.name}/issues"
+                        }
+
+                        licenses {
+                            license {
+                                name 'MIT License'
+                                url 'https://opensource.org/licenses/MIT'
+                                distribution = 'repo'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

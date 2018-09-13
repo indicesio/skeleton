@@ -1,12 +1,11 @@
 plugins {
     id 'java'
-    id 'maven'
-    id 'com.github.hierynomus.license' version '0.14.0'
-    id 'org.ajoberstar.grgit' version '2.3.0'
+    id 'com.github.johnrengelman.shadow' version '2.0.4' // Uber JARs
+    id 'com.github.hierynomus.license' version '0.14.0' // License headers
+    id 'org.ajoberstar.grgit' version '2.3.0' // Gradle + Git
 }
 
 group 'io.indices'
-version '1.0-SNAPSHOT'
 
 defaultTasks 'licenseFormat', 'build'
 
@@ -50,3 +49,6 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
+
+// Deployment:
+apply from: file('gradle/deploy.gradle')

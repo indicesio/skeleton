@@ -1,0 +1,22 @@
+sudo: false
+dist: trusty
+
+language: java
+jdk:
+- openjdk8
+- oraclejdk8
+
+install: true
+script: ./.travis.sh
+
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+
+env:
+  global:
+  - DEPLOY_REPO=repourl
+  - DEPLOY_ARTIFACT_NAME=ARTIFACT_NAME
+  - secure: "travis encrypt -r ORGANIZATION/REPOSITORY DEPLOY_USERNAME=..."
+  - secure: "travis encrypt -r ORGANIZATION/REPOSITORY DEPLOY_PASSWORD=..."
